@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+smat.db
+.pytest_cache/
+
