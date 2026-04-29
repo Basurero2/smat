@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from . import models, database # El punto (.) indica que están en la misma carpeta
@@ -19,6 +20,14 @@ app = FastAPI(
     version="1.6.2",
     contact={"name": "Juan Carlos", "email": "juan.carlos@unmsm.edu.pe"}
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Permite conexiones de cualquier origen (Chrome, Móvil)
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # --- CONFIGURACIÓN DE SEGURIDAD (Lab 4.4) ---
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
